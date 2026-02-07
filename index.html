@@ -15,12 +15,14 @@
       --bg1:#fff0f6;
       --bg2:#ff9ac8;
       --bg3:#ff4d94;
-      --bg4:#b3004b;
+      --bg4:#a40044;
+
       --glass: rgba(255,255,255,0.22);
-      --glass2: rgba(255,255,255,0.12);
+      --glass2: rgba(255,255,255,0.10);
       --stroke: rgba(255,255,255,0.38);
-      --shadow2: rgba(0,0,0,0.28);
-      --accent:#8a0038;
+      --shadow: rgba(0,0,0,0.28);
+
+      --accent:#7a0031;
     }
 
     *{ box-sizing:border-box; margin:0; padding:0; }
@@ -41,7 +43,7 @@
         linear-gradient(135deg, var(--bg3), var(--bg4));
     }
 
-    /* Glow */
+    /* Glow layer */
     .glow{
       position:absolute;
       inset:-60px;
@@ -63,7 +65,7 @@
       to{ transform: rotate(360deg); }
     }
 
-    /* Falling roses (LESS COUNT for performance) */
+    /* Falling roses */
     .rose{
       position:absolute;
       top:-60px;
@@ -84,9 +86,28 @@
       }
     }
 
+    /* Sparkles */
+    .sparkle{
+      position:absolute;
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      background: rgba(255,255,255,0.8);
+      box-shadow: 0 0 20px rgba(255,255,255,0.7);
+      opacity:0.25;
+      z-index:1;
+      animation: sparkleMove linear infinite;
+      pointer-events:none;
+    }
+
+    @keyframes sparkleMove{
+      from{ transform: translateY(110vh) scale(0.8); opacity:0.05; }
+      to{ transform: translateY(-20vh) scale(1.4); opacity:0.35; }
+    }
+
     /* Card */
     .card{
-      width:min(610px, 92vw);
+      width:min(640px, 92vw);
       border-radius:28px;
       padding:30px 26px;
       text-align:center;
@@ -96,7 +117,7 @@
       -webkit-backdrop-filter: blur(16px);
 
       border: 1px solid var(--stroke);
-      box-shadow: 0 32px 100px var(--shadow2);
+      box-shadow: 0 32px 110px var(--shadow);
 
       position:relative;
       z-index:5;
@@ -109,8 +130,8 @@
       position:absolute;
       top:-60px;
       left:-60px;
-      width:220px;
-      height:220px;
+      width:240px;
+      height:240px;
       background: radial-gradient(circle, rgba(255,255,255,0.35), transparent 70%);
       transform: rotate(20deg);
       opacity:0.9;
@@ -126,7 +147,7 @@
       width:98px;
       height:98px;
       border-radius:50%;
-      margin:0 auto 14px;
+      margin:0 auto 12px;
 
       border:4px solid rgba(255,255,255,0.72);
       box-shadow:0 18px 55px rgba(0,0,0,0.18);
@@ -147,13 +168,14 @@
       text-shadow:0 16px 55px rgba(0,0,0,0.18);
     }
 
-    .text{
+    .typing{
       font-size:16px;
       line-height:1.75;
       color: rgba(255,255,255,0.95);
-      margin-bottom:18px;
+      margin-bottom:16px;
       font-weight:600;
       text-shadow:0 16px 55px rgba(0,0,0,0.14);
+      min-height: 92px;
     }
 
     .question{
@@ -206,14 +228,28 @@
     .screen{
       display:none;
       opacity:0;
-      transform: translateY(8px);
-      transition: opacity 0.45s ease, transform 0.45s ease;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
     .screen.active{
       display:block;
       opacity:1;
       transform: translateY(0);
+    }
+
+    /* Bouquet reveal */
+    .bouquet{
+      font-size: 64px;
+      margin: 10px 0 6px;
+      animation: bouquetPop 0.9s ease;
+      filter: drop-shadow(0 18px 55px rgba(0,0,0,0.16));
+    }
+
+    @keyframes bouquetPop{
+      0%{ transform: scale(0.7); opacity:0; }
+      60%{ transform: scale(1.08); opacity:1; }
+      100%{ transform: scale(1); opacity:1; }
     }
 
     .title2{
@@ -242,7 +278,7 @@
       text-shadow:0 16px 55px rgba(0,0,0,0.14);
     }
 
-    /* Confetti (LESS + faster remove) */
+    /* Confetti */
     .confetti{
       position:absolute;
       top:-30px;
@@ -266,7 +302,7 @@
       z-index:60;
       pointer-events:none;
       font-size:30px;
-      animation: rise 2.3s ease-out forwards;
+      animation: rise 2.2s ease-out forwards;
       filter: drop-shadow(0 12px 25px rgba(0,0,0,0.14));
       will-change: transform;
     }
@@ -291,7 +327,7 @@
   <div class="glow"></div>
 
   <script>
-    /* 🌹 Falling roses count reduced for smoothness */
+    /* Falling roses */
     for(let i=0;i<16;i++){
       const r=document.createElement("div");
       r.className="rose";
@@ -301,6 +337,18 @@
       r.style.animationDelay = (Math.random()*6) + "s";
       r.style.fontSize = (18 + Math.random()*28) + "px";
       document.body.appendChild(r);
+    }
+
+    /* Sparkles */
+    for(let i=0;i<14;i++){
+      const s=document.createElement("div");
+      s.className="sparkle";
+      s.style.left = Math.random()*100 + "vw";
+      s.style.animationDuration = (8 + Math.random()*8) + "s";
+      s.style.animationDelay = (Math.random()*6) + "s";
+      s.style.opacity = (0.08 + Math.random()*0.25);
+      s.style.transform = `scale(${0.7 + Math.random()*1.3})`;
+      document.body.appendChild(s);
     }
   </script>
 
@@ -312,10 +360,7 @@
 
       <h1>Hey My Love 🤍</h1>
 
-      <div class="text">
-        Today is Flower Day 🌸 <br>
-        And I want to give you something pure & special...
-      </div>
+      <div class="typing" id="typingText"></div>
 
       <div class="question">
         Will you accept this White Rose from me? 🤍🌹
@@ -329,34 +374,71 @@
 
     <!-- SCREEN 2 -->
     <div class="screen" id="screen2">
+      <div class="bouquet">💐🤍🌹</div>
       <div class="title2">Congratulations 🤍</div>
 
-      <div class="text">
+      <div class="typing" style="min-height:auto; margin-bottom:10px;">
         You are officially, proudly, and forever
       </div>
 
-      <div class="text" style="font-weight:900;">
+      <div class="typing" style="min-height:auto; font-weight:900; margin-bottom:8px;">
         🤍 The White Rose of 🤍
       </div>
 
       <div class="big" id="bigName">Daljit Singh 🤍🌹</div>
 
-      <div class="text">
+      <div class="typing" style="min-height:auto;">
         I choose you today. I'll choose you tomorrow. <br>
         And I'll keep choosing you — always.
       </div>
 
       <div class="final-line">
-        Happy Flower Day 🤍🌹💞
+        Happy Rose Day 🤍🌹💞
       </div>
     </div>
 
   </div>
 
   <script>
+    /* ========= CUSTOMIZE ========= */
     const myName = "Daljit Singh";
     document.getElementById("bigName").innerText = myName + " 🤍🌹";
 
+    /* ========= Typing Effect ========= */
+    const typingText = document.getElementById("typingText");
+    const lines = [
+      "Today is Rose Day 🤍🌹",
+      "And I want to give you something pure & special...",
+      "Just one question, my love 💖"
+    ];
+
+    let lineIndex = 0;
+    let charIndex = 0;
+
+    function typeLoop(){
+      if(lineIndex >= lines.length) return;
+
+      const currentLine = lines[lineIndex];
+
+      typingText.innerHTML =
+        lines.slice(0, lineIndex).join("<br>") +
+        (lineIndex > 0 ? "<br>" : "") +
+        currentLine.slice(0, charIndex);
+
+      charIndex++;
+
+      if(charIndex <= currentLine.length){
+        setTimeout(typeLoop, 28);
+      } else {
+        lineIndex++;
+        charIndex = 0;
+        setTimeout(typeLoop, 520);
+      }
+    }
+
+    typeLoop();
+
+    /* ========= NO button run away ========= */
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
     const btnArea = document.getElementById("btnArea");
@@ -375,15 +457,13 @@
       noBtn.style.top  = y + "px";
     }
 
-    // Desktop hover
     noBtn.addEventListener("mouseover", moveNoButton);
-
-    // Use ONLY pointerdown (avoid double touch firing)
     noBtn.addEventListener("pointerdown", (e)=>{
       e.preventDefault();
       moveNoButton();
     });
 
+    /* ========= Confetti + rose burst ========= */
     function confettiBurst(){
       for(let i=0;i<40;i++){
         const c=document.createElement("div");
@@ -416,7 +496,7 @@
 
     function switchScreen(){
       screen1.classList.remove("active");
-      setTimeout(()=>screen2.classList.add("active"), 120);
+      setTimeout(()=>screen2.classList.add("active"), 140);
     }
 
     yesBtn.addEventListener("click", ()=>{
