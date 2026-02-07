@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>White Rose Surprise 🤍🌹</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg1:#fff0f6;
+      --bg2:#ff9ac8;
+      --bg3:#ff4d94;
+      --bg4:#b3004b;
+      --glass: rgba(255,255,255,0.22);
+      --glass2: rgba(255,255,255,0.12);
+      --stroke: rgba(255,255,255,0.38);
+      --shadow2: rgba(0,0,0,0.28);
+      --accent:#8a0038;
+    }
+
+    *{ box-sizing:border-box; margin:0; padding:0; }
+
+    body{
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      overflow:hidden;
+      position:relative;
+      font-family:"Poppins", sans-serif;
+
+      background:
+        radial-gradient(circle at 15% 10%, var(--bg1), transparent 45%),
+        radial-gradient(circle at 80% 20%, #ffd3e6, transparent 45%),
+        radial-gradient(circle at 55% 85%, var(--bg2), transparent 50%),
+        linear-gradient(135deg, var(--bg3), var(--bg4));
+    }
+
+    /* Glow */
+    .glow{
+      position:absolute;
+      inset:-60px;
+      background: conic-gradient(from 90deg,
+        rgba(255,255,255,0.25),
+        rgba(255,154,200,0.22),
+        rgba(255,77,148,0.22),
+        rgba(255,255,255,0.25)
+      );
+      filter: blur(70px);
+      opacity:0.7;
+      animation: spin 20s linear infinite;
+      z-index:0;
+      pointer-events:none;
+    }
+
+    @keyframes spin{
+      from{ transform: rotate(0deg); }
+      to{ transform: rotate(360deg); }
+    }
+
+    /* Falling roses (LESS COUNT for performance) */
+    .rose{
+      position:absolute;
+      top:-60px;
+      font-size:22px;
+      opacity:0.18;
+      pointer-events:none;
+      user-select:none;
+      animation: fall linear infinite;
+      filter: drop-shadow(0 12px 25px rgba(0,0,0,0.14));
+      z-index:1;
+      will-change: transform;
+    }
+
+    @keyframes fall{
+      to{
+        transform: translateY(120vh) rotate(240deg);
+        opacity:0.06;
+      }
+    }
+
+    /* Card */
+    .card{
+      width:min(610px, 92vw);
+      border-radius:28px;
+      padding:30px 26px;
+      text-align:center;
+
+      background: linear-gradient(180deg, var(--glass), var(--glass2));
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+
+      border: 1px solid var(--stroke);
+      box-shadow: 0 32px 100px var(--shadow2);
+
+      position:relative;
+      z-index:5;
+      animation: popIn 0.7s ease;
+      overflow:hidden;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      top:-60px;
+      left:-60px;
+      width:220px;
+      height:220px;
+      background: radial-gradient(circle, rgba(255,255,255,0.35), transparent 70%);
+      transform: rotate(20deg);
+      opacity:0.9;
+      pointer-events:none;
+    }
+
+    @keyframes popIn{
+      from{ transform: scale(0.86); opacity:0; }
+      to{ transform: scale(1); opacity:1; }
+    }
+
+    .circle{
+      width:98px;
+      height:98px;
+      border-radius:50%;
+      margin:0 auto 14px;
+
+      border:4px solid rgba(255,255,255,0.72);
+      box-shadow:0 18px 55px rgba(0,0,0,0.18);
+
+      background: rgba(255,255,255,0.22);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:46px;
+    }
+
+    h1{
+      font-family:"Great Vibes", cursive;
+      font-size:60px;
+      color:white;
+      font-weight:400;
+      margin-bottom:8px;
+      text-shadow:0 16px 55px rgba(0,0,0,0.18);
+    }
+
+    .text{
+      font-size:16px;
+      line-height:1.75;
+      color: rgba(255,255,255,0.95);
+      margin-bottom:18px;
+      font-weight:600;
+      text-shadow:0 16px 55px rgba(0,0,0,0.14);
+    }
+
+    .question{
+      font-size:18px;
+      font-weight:900;
+      color:white;
+      margin-bottom:18px;
+      text-shadow:0 16px 55px rgba(0,0,0,0.14);
+    }
+
+    /* Buttons */
+    .btn-area{
+      position:relative;
+      height:135px;
+      margin-top:6px;
+    }
+
+    .btn{
+      border:none;
+      padding:14px 30px;
+      border-radius:999px;
+      font-size:17px;
+      font-weight:900;
+      cursor:pointer;
+      transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
+      user-select:none;
+      position:absolute;
+      top:46px;
+      box-shadow:0 18px 50px rgba(0,0,0,0.18);
+      touch-action: manipulation;
+      font-family:"Poppins", sans-serif;
+      border: 1px solid rgba(255,255,255,0.35);
+    }
+
+    .btn:active{ transform: scale(0.96); }
+
+    #yesBtn{
+      left:18%;
+      background: linear-gradient(135deg, #ffffff, #ffe7f2, #ffc1dd);
+      color: var(--accent);
+    }
+
+    #noBtn{
+      left:58%;
+      background: linear-gradient(135deg, #1f1f22, #47474f);
+      color:white;
+    }
+
+    /* Screens */
+    .screen{
+      display:none;
+      opacity:0;
+      transform: translateY(8px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+
+    .screen.active{
+      display:block;
+      opacity:1;
+      transform: translateY(0);
+    }
+
+    .title2{
+      font-family:"Great Vibes", cursive;
+      font-size:62px;
+      color:white;
+      font-weight:400;
+      margin-bottom:8px;
+      text-shadow:0 16px 55px rgba(0,0,0,0.18);
+    }
+
+    .big{
+      font-size:30px;
+      font-weight:1000;
+      margin:10px 0 14px;
+      color:white;
+      text-shadow:0 16px 55px rgba(0,0,0,0.16);
+      letter-spacing:0.4px;
+    }
+
+    .final-line{
+      margin-top:14px;
+      font-size:17px;
+      font-weight:900;
+      color: rgba(255,255,255,0.95);
+      text-shadow:0 16px 55px rgba(0,0,0,0.14);
+    }
+
+    /* Confetti (LESS + faster remove) */
+    .confetti{
+      position:absolute;
+      top:-30px;
+      width:10px;
+      height:16px;
+      border-radius:3px;
+      opacity:0.95;
+      z-index:50;
+      pointer-events:none;
+      animation: confettiFall linear forwards;
+      will-change: transform;
+    }
+
+    @keyframes confettiFall{
+      to{ transform: translateY(120vh) rotate(900deg); opacity:0; }
+    }
+
+    /* Burst */
+    .burst{
+      position:absolute;
+      z-index:60;
+      pointer-events:none;
+      font-size:30px;
+      animation: rise 2.3s ease-out forwards;
+      filter: drop-shadow(0 12px 25px rgba(0,0,0,0.14));
+      will-change: transform;
+    }
+
+    @keyframes rise{
+      0%{ transform: translateY(0) scale(0.85); opacity:0; }
+      15%{ opacity:1; }
+      100%{ transform: translateY(-220px) scale(1.4); opacity:0; }
+    }
+
+    @media (max-width:420px){
+      #yesBtn{ left:10%; }
+      #noBtn{ left:55%; }
+      h1{ font-size:50px; }
+      .title2{ font-size:52px; }
+      .big{ font-size:26px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="glow"></div>
+
+  <script>
+    /* 🌹 Falling roses count reduced for smoothness */
+    for(let i=0;i<16;i++){
+      const r=document.createElement("div");
+      r.className="rose";
+      r.innerText="🤍🌹";
+      r.style.left = Math.random()*100 + "vw";
+      r.style.animationDuration = (7 + Math.random()*7) + "s";
+      r.style.animationDelay = (Math.random()*6) + "s";
+      r.style.fontSize = (18 + Math.random()*28) + "px";
+      document.body.appendChild(r);
+    }
+  </script>
+
+  <div class="card">
+
+    <!-- SCREEN 1 -->
+    <div class="screen active" id="screen1">
+      <div class="circle">🤍🌹</div>
+
+      <h1>Hey My Love 🤍</h1>
+
+      <div class="text">
+        Today is Flower Day 🌸 <br>
+        And I want to give you something pure & special...
+      </div>
+
+      <div class="question">
+        Will you accept this White Rose from me? 🤍🌹
+      </div>
+
+      <div class="btn-area" id="btnArea">
+        <button class="btn" id="yesBtn">Yes 🤍🌹</button>
+        <button class="btn" id="noBtn">No 💔</button>
+      </div>
+    </div>
+
+    <!-- SCREEN 2 -->
+    <div class="screen" id="screen2">
+      <div class="title2">Congratulations 🤍</div>
+
+      <div class="text">
+        You are officially, proudly, and forever
+      </div>
+
+      <div class="text" style="font-weight:900;">
+        🤍 The White Rose of 🤍
+      </div>
+
+      <div class="big" id="bigName">Daljit Singh 🤍🌹</div>
+
+      <div class="text">
+        I choose you today. I'll choose you tomorrow. <br>
+        And I'll keep choosing you — always.
+      </div>
+
+      <div class="final-line">
+        Happy Flower Day 🤍🌹💞
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const myName = "Daljit Singh";
+    document.getElementById("bigName").innerText = myName + " 🤍🌹";
+
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const btnArea = document.getElementById("btnArea");
+    const screen1 = document.getElementById("screen1");
+    const screen2 = document.getElementById("screen2");
+
+    function moveNoButton(){
+      const rect = btnArea.getBoundingClientRect();
+      const maxX = rect.width - noBtn.offsetWidth;
+      const maxY = rect.height - noBtn.offsetHeight;
+
+      const x = Math.floor(Math.random()*maxX);
+      const y = Math.floor(Math.random()*maxY);
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top  = y + "px";
+    }
+
+    // Desktop hover
+    noBtn.addEventListener("mouseover", moveNoButton);
+
+    // Use ONLY pointerdown (avoid double touch firing)
+    noBtn.addEventListener("pointerdown", (e)=>{
+      e.preventDefault();
+      moveNoButton();
+    });
+
+    function confettiBurst(){
+      for(let i=0;i<40;i++){
+        const c=document.createElement("div");
+        c.className="confetti";
+        c.style.left = Math.random()*100 + "vw";
+        c.style.background = `hsl(${Math.random()*360}, 90%, 60%)`;
+        c.style.animationDuration = (2.0 + Math.random()*1.4) + "s";
+        c.style.width = (6 + Math.random()*10) + "px";
+        c.style.height = (10 + Math.random()*18) + "px";
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(), 3200);
+      }
+    }
+
+    function roseBurst(){
+      const emojis = ["🤍🌹","🤍","🌹","✨","💖","💐"];
+      const rect = yesBtn.getBoundingClientRect();
+
+      for(let i=0;i<18;i++){
+        const b=document.createElement("div");
+        b.className="burst";
+        b.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+        b.style.left = (rect.left + rect.width/2 + (Math.random()*220 - 110)) + "px";
+        b.style.top  = (rect.top + rect.height/2 + (Math.random()*40 - 20)) + "px";
+        b.style.fontSize = (20 + Math.random()*22) + "px";
+        document.body.appendChild(b);
+        setTimeout(()=>b.remove(), 2600);
+      }
+    }
+
+    function switchScreen(){
+      screen1.classList.remove("active");
+      setTimeout(()=>screen2.classList.add("active"), 120);
+    }
+
+    yesBtn.addEventListener("click", ()=>{
+      confettiBurst();
+      roseBurst();
+      switchScreen();
+    });
+  </script>
+
+</body>
+</html>
